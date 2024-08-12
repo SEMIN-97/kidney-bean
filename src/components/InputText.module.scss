@@ -1,0 +1,35 @@
+@import 'src/mixins';
+
+.inputWrap {
+  @include typo-body;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--color-black);
+
+
+  &.error input {
+    border-color: var(--color-danger);
+  }
+
+  input {
+    height: 50px;
+    padding: 0 16px;
+    background-color: #FFF;
+    border: 1px solid var(--color-black);
+    border-radius: 8px;
+
+    &::placeholder {
+      color: #999;
+    }
+
+    &:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+  }
+
+  .errorMessage {
+    color: var(--color-danger);
+  }
+}
