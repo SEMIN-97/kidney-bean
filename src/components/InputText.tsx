@@ -38,7 +38,9 @@ export default function InputText({
         disabled={disabled}
         onChange={onChange}
       />
-      <p className={styles.errorMessage}>{ errorMessage }</p>
+      {
+        errorMessage && <p className={styles.errorMessage}>{ errorMessage }</p>
+      }
     </div>
   );
 }
