@@ -1,4 +1,8 @@
+@import "src/styles/mixins/layout";
+@import "src/styles/mixins/typography";
+
 :root {
+  --color-app-background: #F9F6F1;
   --color-primary: #55921B;
   --color-primary-dark: #478315;
   --color-secondary: #C5CAC2;
@@ -15,14 +19,18 @@
 }
 
 html {
+  @include typo-body;
+  height: 100%;
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   line-height: 1.5;
+  background-color: #A8B29D;
   -webkit-text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   min-width: 300px;
+  height: 100%;
   overflow: auto;
 }
 
@@ -73,8 +81,9 @@ video {
   outline-offset: 2px;
 }
 
-main {
-  padding: 100px 0 60px;
+#root {
+  @include flex-layout(center, center);
+  height: 100%;
 }
 
 .hidden {
