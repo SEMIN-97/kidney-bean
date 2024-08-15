@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './InputText.module.scss';
 
 interface InputTextProps {
-  label: string;
+  label?: string;
   value: string;
   placeholder?: string;
   disabled?: boolean;
@@ -28,7 +28,9 @@ export default function InputText({
         [styles.error]: errorMessage
       }
     )}>
-      <label>{ label }</label>
+      {
+        label && <label>{ label }</label>
+      }
       <input
         type="text"
         value={value}
