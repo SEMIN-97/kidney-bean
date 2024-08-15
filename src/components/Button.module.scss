@@ -1,4 +1,5 @@
-@import 'src/mixins';
+@import 'src/styles/mixins/layout';
+@import 'src/styles/mixins/typography';
 
 .button {
   @include flex-layout(center, center);
