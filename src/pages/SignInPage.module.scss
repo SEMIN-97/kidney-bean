@@ -1,0 +1,14 @@
+@import "src/styles/mixins/layout";
+
+.signInPage {
+  @include spacing-lg;
+  margin-top: 120px;
+}
+
+.heroText {
+  @include hero-text-section;
+}
+
+.formSection {
+  @include form-section;
+}

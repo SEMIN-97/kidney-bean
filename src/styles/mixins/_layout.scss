@@ -1,5 +1,31 @@
+@import "src/styles/mixins/typography";
+
 @mixin flex-layout($align-items: stretch, $justify-content: flex-start) {
   display: flex;
   align-items: $align-items;
   justify-content: $justify-content;
+}
+
+@mixin spacing-md($direction: column) {
+  display: flex;
+  flex-direction: $direction;
+  gap: 16px;
+}
+
+@mixin spacing-lg($direction: column) {
+  display: flex;
+  flex-direction: $direction;
+  gap: 40px;
+}
+
+@mixin hero-text-section() {
+  @include spacing-md;
+
+  h2 {
+    @include typo-title;
+  }
+}
+
+@mixin form-section {
+  @include spacing-md;
 }
