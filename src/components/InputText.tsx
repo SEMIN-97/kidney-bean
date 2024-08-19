@@ -1,26 +1,22 @@
-import { ChangeEvent } from 'react';
+import { forwardRef } from 'react';
 import clsx from 'clsx';
 
 import styles from './InputText.module.scss';
 
 interface InputTextProps {
   label?: string;
-  value: string;
   placeholder?: string;
   disabled?: boolean;
   errorMessage?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function InputText({
+const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
   label,
-  value,
   placeholder,
   disabled,
   errorMessage,
-  onChange
-}: InputTextProps) {
-
+  ...rest
+}, ref) => {
   return (
     <div className={clsx(
       styles.inputWrap,
@@ -33,14 +29,18 @@ export default function InputText({
       }
       <input
         type="text"
-        value={value}
         placeholder={placeholder}
         disabled={disabled}
-        onChange={onChange}
+        ref={ref}
+        {...rest}
       />
       {
         errorMessage && <p className={styles.errorMessage}>{ errorMessage }</p>
       }
     </div>
   );
-}
+});
+
+InputText.displayName = 'InputText';
+
+export default InputText;
