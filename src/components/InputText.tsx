@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 
 import styles from './InputText.module.scss';
@@ -8,6 +8,7 @@ interface InputTextProps {
   placeholder?: string;
   disabled?: boolean;
   errorMessage?: string;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
@@ -15,6 +16,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
   placeholder,
   disabled,
   errorMessage,
+  onKeyDown,
   ...rest
 }, ref) => {
   return (
@@ -32,6 +34,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
         placeholder={placeholder}
         disabled={disabled}
         ref={ref}
+        onKeyDown={onKeyDown}
         {...rest}
       />
       {
