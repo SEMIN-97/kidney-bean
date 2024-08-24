@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import InputText from '../components/InputText.tsx';
 import Button from '../components/Button.tsx';
 import styles from './SignInPage.module.scss';
 
-export default function SignInPage() {
-  const [email, setEmail] = useState('');
+interface SignInForm {
+  email: string;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+export default function SignInPage() {
+  const {register, handleSubmit, formState: {errors, isValid}} = useForm<SignInForm>({ mode: 'onBlur' });
+
+  const onSubmit: SubmitHandler<SignInForm> = (data: SignInForm) => {
+    console.log('submit', data);
   };
   
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Enter') {
+      return;
+    }
+    
+    handleSubmit(onSubmit);
   };
 
   return (
@@ -23,17 +32,22 @@ export default function SignInPage() {
       </div>
       <form
         className={styles.formSection}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <InputText
-          value={email}
           placeholder="user@eamil.com"
-          onChange={handleChange}
+          {...register('email', {
+            required: true,
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
+              message: '이메일 형식을 확인해 주세요'
+            }
+          })}
+          errorMessage={errors.email?.message}
+          onKeyDown={handleKeyDown}
         />
-        <Button type="submit" label="계속하기" />
+        <Button type="submit" label="계속하기" disabled={!isValid} />
       </form>
-
     </section>
   );
-
 }
