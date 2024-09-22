@@ -1,9 +1,9 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import InputText from '../components/InputText.tsx';
-import Button from '../components/Button.tsx';
-import styles from './SignInPage.module.scss';
+import InputText from '../../../components/InputText.tsx';
+import Button from '../../../components/Button.tsx';
+import styles from '../index.module.scss';
 
 interface SignInForm {
   email: string;

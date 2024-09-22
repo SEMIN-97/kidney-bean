@@ -1,4 +1,4 @@
-import SignInPage from './pages/SignInPage.tsx';
+import SignInPage from './pages/signIn';
 import styles from './App.module.scss';
 
 function App() {
