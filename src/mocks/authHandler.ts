@@ -13,19 +13,19 @@ export const authHandler = [
     const { email } = params;
 
     if (email === verifiedUser.email) {
-      return new HttpResponse(null, { status: 200 });
+      return HttpResponse.json(null, { status: 200 });
     }
 
-    return new HttpResponse(null, { status: 400 });
+    return HttpResponse.json(null, { status: 400 });
   }),
   http.post<never, LoginRequest>(`${endPoint}/login`, async ({ request }) => {
     const { email, password } = await request.json();
 
     if (email === verifiedUser.email && password === verifiedUser.password) {
-      return new HttpResponse(null, { status: 200 });
+      return HttpResponse.json(null, { status: 200 });
     }
 
-    return new HttpResponse(null, { status: 401 });
+    return HttpResponse.json(null, { status: 401 });
   }),
   http.post<never, User, User>(`${endPoint}/user`, async ({ request }) => {
     const { email, nickname } = await request.json();
