@@ -4,16 +4,22 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import InputText from '../../../components/InputText.tsx';
 import Button from '../../../components/Button.tsx';
 import styles from '../index.module.scss';
+import { useValidateEmailMutation } from '../../../hooks/queries/useAuth.ts';
 
 interface SignInForm {
   email: string;
 }
 
 export default function SignInEmailForm() {
-  const {register, handleSubmit, formState: {errors, isValid}} = useForm<SignInForm>({ mode: 'onBlur' });
+  const {register, handleSubmit, setError, formState: {errors, isValid}} = useForm<SignInForm>({mode: 'onBlur'});
+  const {mutate} = useValidateEmailMutation();
 
   const onSubmit: SubmitHandler<SignInForm> = (data: SignInForm) => {
-    console.log('submit', data);
+    mutate(data.email, {
+      onError: () => {
+        setError('email', {message: '이메일을 다시 확인해주세요'});
+      }
+    });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
