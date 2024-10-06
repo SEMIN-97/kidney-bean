@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import { LoginRequest, ValidateEmailPathParams } from '../types/authType.ts';
+import { LoginRequest, User, ValidateEmailPathParams } from '../types/authType.ts';
 
 const endPoint = '/api/auth';
 const verifiedUser: LoginRequest  = {
@@ -17,5 +17,23 @@ export const authHandler = [
     }
 
     return new HttpResponse(null, { status: 400 });
+  }),
+  http.post<never, LoginRequest>(`${endPoint}/login`, async ({ request }) => {
+    const { email, password } = await request.json();
+
+    if (email === verifiedUser.email && password === verifiedUser.password) {
+      return new HttpResponse(null, { status: 200 });
+    }
+
+    return new HttpResponse(null, { status: 401 });
+  }),
+  http.post<never, User, User>(`${endPoint}/user`, async ({ request }) => {
+    const { email, nickname } = await request.json();
+
+    if (email === verifiedUser.email) {
+      return HttpResponse.json(null, { status: 409 });
+    }
+
+    return HttpResponse.json({ email, nickname }, { status: 201 });
   })
 ];
