@@ -11,13 +11,13 @@ interface SignInForm {
 }
 
 export default function SignInEmailForm() {
-  const {register, handleSubmit, setError, formState: {errors, isValid}} = useForm<SignInForm>({mode: 'onBlur'});
-  const {mutate} = useValidateEmailMutation();
+  const { register, handleSubmit, setError, formState: { errors, isValid } } = useForm<SignInForm>({ mode: 'onBlur' });
+  const { mutate } = useValidateEmailMutation();
 
   const onSubmit: SubmitHandler<SignInForm> = (data: SignInForm) => {
     mutate(data.email, {
       onError: () => {
-        setError('email', {message: '이메일을 다시 확인해주세요'});
+        setError('email', { message: '이메일을 다시 확인해주세요' });
       }
     });
   };

@@ -41,5 +41,6 @@ module.exports = {
         'afterOpening': 'never'
       }
     ],
+    'object-curly-spacing': ['error', 'always']
   },
 }
