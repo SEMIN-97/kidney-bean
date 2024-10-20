@@ -1,9 +1,10 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, HTMLInputTypeAttribute } from 'react';
 import clsx from 'clsx';
 
 import styles from './InputText.module.scss';
 
-interface InputTextProps {
+export interface InputTextProps {
+  type?: HTMLInputTypeAttribute;
   label?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -12,6 +13,7 @@ interface InputTextProps {
 }
 
 const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
+  type = 'text',
   label,
   placeholder,
   disabled,
@@ -30,11 +32,11 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
         label && <label>{ label }</label>
       }
       <input
-        type="text"
+        type={type}
         placeholder={placeholder}
         disabled={disabled}
-        ref={ref}
         onKeyDown={onKeyDown}
+        ref={ref}
         {...rest}
       />
       {
